@@ -770,6 +770,43 @@ section {
     .contact-info {
         padding: 2rem;
     }
+    
+    /* Mobile fixes for experience and education cards */
+    .experience-info,
+    .education-info {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .experience-icon,
+    .education-icon {
+        align-self: center;
+    }
+    
+    .experience-card,
+    .education-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .experience-details h3,
+    .education-details h3 {
+        font-size: 1.5rem;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .experience-details h4,
+    .education-details h4 {
+        font-size: 1.1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .experience-tech,
+    .tech-tag {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
