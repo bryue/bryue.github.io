@@ -840,54 +840,105 @@ section {
     /* Additional mobile fixes for very small screens */
     .experience-card,
     .education-card {
-        padding: 1.5rem 1rem;
-        margin: 0 0.5rem 1.5rem 0.5rem;
+        padding: 1rem 0.8rem;
+        margin: 0 0.3rem 1.5rem 0.3rem;
         overflow: hidden;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .experience-details,
+    .education-details {
+        overflow: hidden;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
     }
     
     .experience-details h3,
     .education-details h3 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         line-height: 1.3;
         margin-bottom: 0.8rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
     }
     
     .experience-details h4,
     .education-details h4 {
-        font-size: 1rem;
+        font-size: 0.95rem;
         line-height: 1.4;
         margin-bottom: 0.5rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
     }
     
     .experience-location,
     .experience-years,
     .education-years {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
     }
     
     .experience-description,
     .education-description {
-        font-size: 0.9rem;
-        line-height: 1.6;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
+    }
+    
+    .experience-description p,
+    .education-description p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
     }
     
     .experience-description ul,
     .education-description ul {
-        margin-left: 1rem;
-        padding-right: 0.5rem;
+        margin-left: 0.8rem;
+        padding-right: 0.3rem;
+        max-width: 100%;
+        overflow: hidden;
     }
     
     .experience-description li,
     .education-description li {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         margin-bottom: 0.4rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
+    }
+    
+    .experience-tech {
+        max-width: 100%;
+        overflow: hidden;
     }
     
     .tech-tag {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.6rem;
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+        display: inline-block;
     }
     
     .container {
