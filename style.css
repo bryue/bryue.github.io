@@ -759,6 +759,13 @@ section {
     .footer-content {
         flex-direction: column;
         text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.9rem;
     }
     
     .navbar {
@@ -874,8 +881,8 @@ section {
         margin-bottom: 0.8rem;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        word-break: break-all;
-        hyphens: auto;
+        word-break: break-word;
+        hyphens: none;
         max-width: 100%;
         white-space: normal;
     }
