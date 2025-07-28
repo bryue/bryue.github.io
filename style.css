@@ -768,6 +768,10 @@ section {
         font-size: 0.9rem;
     }
     
+    .footer {
+        padding: 1.5rem 0;
+    }
+    
     .navbar {
         width: 95%;
         padding: 10px 20px;
@@ -850,6 +854,23 @@ section {
     
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Mobile footer fixes */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.3rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.3rem;
+        font-size: 0.8rem;
+    }
+    
+    .footer {
+        padding: 1rem 0;
     }
     
     /* Additional mobile fixes for very small screens */
