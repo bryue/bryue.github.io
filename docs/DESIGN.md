@@ -22,10 +22,10 @@ No build system. Four static files served directly by GitHub Pages:
 
 ### External Dependencies
 
-| Resource | Loaded from |
-|----------|-------------|
-| Inter font (300–700) | Google Fonts CDN |
-| Font Awesome 6.0.0 | cdnjs |
+| Resource | Version | Loaded from | Integrity (SRI) |
+|----------|---------|-------------|-----------------|
+| Inter font (400–700) | Variable | `fonts.googleapis.com` / `fonts.gstatic.com` | N/A (Google Fonts does not support SRI) |
+| Font Awesome | 6.0.0 | `cdnjs.cloudflare.com` | `sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS` |
 
 ### Browser Support Targets
 
