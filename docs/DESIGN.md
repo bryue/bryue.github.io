@@ -1,10 +1,11 @@
 # Design Document — bryue.github.io
 
-Personal portfolio site for Brandon Yue. This document retroactively describes the current design and proposes targeted changes aligned with three guiding principles:
+Personal portfolio site for Brandon Yue. This document describes the current design, aligned with four guiding principles:
 
 1. **Use the most up-to-date tooling** — leverage modern CSS/JS features with broad browser support.
 2. **Be as performant as possible for any browser** — minimize render-blocking resources, compositing cost, and layout thrashing.
 3. **Readability and maintainability** — keep the codebase easy to understand, modify, and extend without tribal knowledge. Reuse code wherever possible and modularize to avoid duplication.
+4. **Security by default** — only load external resources over HTTPS from trusted CDNs. Use `rel="noopener noreferrer"` on all external links. Apply `integrity` (SRI) hashes on third-party scripts and stylesheets. Avoid inline scripts/styles to support a strict Content-Security-Policy. Keep dependencies minimal to reduce attack surface.
 
 ---
 
