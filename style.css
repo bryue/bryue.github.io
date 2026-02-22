@@ -126,6 +126,14 @@ body {
     top: 0;
 }
 
+/* Inline SVG icons */
+.icon {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    vertical-align: -0.125em;
+}
+
 /* Glass Morphism Effect */
 .glass {
     background: var(--color-surface);
@@ -152,7 +160,6 @@ body {
     max-width: 1200px;
     z-index: 1000;
     padding: 15px 30px;
-    transition: background 0.3s ease;
 }
 
 .navbar.scrolled {
@@ -389,7 +396,7 @@ section {
     transform: translateY(-2px);
 }
 
-.skill-item i {
+.skill-item .icon {
     font-size: 1.5rem;
     color: var(--color-primary);
     width: 24px;
@@ -433,8 +440,8 @@ section {
     box-shadow: 0 4px 15px var(--color-accent-shadow);
 }
 
-.experience-icon i,
-.education-icon i {
+.experience-icon .icon,
+.education-icon .icon {
     font-size: 2rem;
     color: white;
 }
@@ -574,7 +581,7 @@ section {
     transform: translateX(5px);
 }
 
-.contact-link i {
+.contact-link .icon {
     color: var(--color-primary);
     font-size: 1.2rem;
     width: 20px;
@@ -680,8 +687,8 @@ section {
         margin-bottom: 0.5rem;
     }
     
-    .experience-icon i,
-    .education-icon i {
+    .experience-icon .icon,
+    .education-icon .icon {
         font-size: 1.5rem;
     }
     
