@@ -97,304 +97,34 @@ Applied to: navbar, about card, experience cards, education cards, contact card,
 
 ---
 
-## 3. Proposed Changes
-
-### 3.1 Font Loading — Self-Host with `font-display: swap`
-
-**Current:** Two render-blocking `<link>` tags to Google Fonts and cdnjs.
-
-**Proposed:**
-
-- Self-host Inter as WOFF2 (subset to Latin, weights 400/500/600/700 — drop unused 300). Place in `assets/fonts/`.
-- Use `@font-face` declarations with `font-display: swap` to eliminate invisible-text flash.
-- Add `<link rel="preload" as="font" type="font/woff2" crossorigin>` for the 400 and 700 weights.
-- Keep Font Awesome on CDN but add `<link rel="preconnect" href="https://cdnjs.cloudflare.com">` and load it with `media="print" onload="this.media='all'"` to defer it.
-
-**Impact:** Removes two cross-origin blocking requests. First paint shows text immediately with system fallback.
-
-### 3.2 Script Loading — `defer` Attribute
-
-**Current:** `<script src="script.js">` at end of `<body>` with no attribute.
-
-**Proposed:** Add `defer` attribute. The script already waits for `DOMContentLoaded` internally, so behavior is unchanged, but the browser can begin parsing/fetching it earlier.
-
-```html
-<script src="script.js" defer></script>
-```
-
-### 3.3 Below-Fold Rendering — `content-visibility: auto`
-
-**Current:** All five sections are rendered eagerly on load.
-
-**Proposed:** Add `content-visibility: auto` with `contain-intrinsic-size` to below-fold sections (Experience, Education, Contact) to skip their rendering until scrolled into view:
-
-```css
-.experience, .education, .contact {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 600px;
-}
-```
-
-**Impact:** Reduces initial rendering work and Time to Interactive, especially on mobile. Supported in all evergreen browsers.
-
-### 3.4 `backdrop-filter` Cost Reduction
-
-**Current:** `.glass` applies `backdrop-filter: blur(20px)` to ~8 elements. JS also mutates `navbar.style.backdropFilter` on every scroll event. The floating `.shape` elements behind them also use `backdrop-filter: blur(10px)`.
-
-**Proposed:**
-
-- Remove `backdrop-filter` from `.shape` elements — they're decorative circles over a static gradient and gain nothing from it.
-- Replace per-scroll JS style mutation on navbar with a CSS class toggle:
-
-```js
-navbar.classList.toggle('scrolled', window.scrollY > 100);
-```
-
-```css
-.navbar.scrolled { background: rgba(255, 255, 255, 0.1); }
-```
-
-- Throttle scroll listeners with `requestAnimationFrame` to avoid layout thrashing from parallax + navbar combined.
-
-**Impact:** Fewer compositing layers, no per-frame inline style writes.
-
-### 3.5 Image Optimization
-
-**Current:** Single JPEG hero image, no `srcset`, no lazy loading, no modern format.
-
-**Proposed:**
-
-- Convert hero image to AVIF with JPEG fallback using `<picture>`:
-
-```html
-<picture>
-  <source srcset="assets/images/Robotics_Picture.avif" type="image/avif">
-  <img src="assets/images/Robotics_Picture.jpeg" alt="..." loading="eager"
-       width="400" height="300" fetchpriority="high">
-</picture>
-```
-
-- Add explicit `width`/`height` attributes to prevent layout shift (improves CLS).
-- Set `fetchpriority="high"` since it's above the fold.
-
-### 3.6 Scroll Listener Optimization
-
-**Current:** Two separate `scroll` event listeners — one for navbar background, one for parallax shapes. Both fire on every scroll event with direct DOM style mutations.
-
-**Proposed:** Merge into a single `scroll` listener throttled with `requestAnimationFrame`:
-
-```js
-let ticking = false;
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        requestAnimationFrame(() => {
-            updateNavbar();
-            updateParallax();
-            ticking = false;
-        });
-        ticking = true;
-    }
-});
-```
-
-### 3.7 Preconnect Hints
-
-Add resource hints to `<head>` for external origins:
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-```
-
-If fonts are self-hosted (§3.1), only the cdnjs preconnect is needed.
-
-### 3.8 Respect `prefers-reduced-motion`
-
-**Current:** CSS has a `prefers-reduced-motion: no-preference` block, but JS unconditionally runs parallax, scroll animations, and ripple effects.
-
-**Proposed:** Gate JS animations on the media query:
-
-```js
-const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-if (motionOk) {
-    // parallax, scroll-reveal, ripple setup
-}
-```
-
-### 3.9 CSS Custom Properties for Design Tokens
-
-**Current:** Brand colors, spacing, and border-radius values are hardcoded across `style.css` (~20 occurrences of `#1e90ff`, ~10 of `rgba(255, 255, 255, 0.05)`, etc.). Changing the accent color requires a find-and-replace across the entire file.
-
-**Proposed:** Define CSS custom properties on `:root` and reference them throughout:
-
-```css
-:root {
-    --color-primary: #1e90ff;
-    --color-primary-dark: #0066cc;
-    --color-primary-light: #00bfff;
-    --color-bg: #0a0a0a;
-    --color-surface: rgba(255, 255, 255, 0.05);
-    --color-text: #ffffff;
-    --color-text-muted: #d0d0d0;
-    --color-text-subtle: #b0b0b0;
-    --radius-card: 20px;
-    --radius-button: 12px;
-    --blur-glass: 20px;
-}
-```
-
-**Impact:** Single source of truth for the design system. Theming (e.g., light mode) becomes a `:root` override instead of a rewrite.
-
-### 3.10 Extract Injected CSS from JavaScript
-
-**Current:** `script.js` appends a `<style>` block to `<head>` containing ripple animation, mobile menu active states, and hamburger transforms (~50 lines). These are static styles with no runtime dependency.
-
-**Proposed:** Move all injected CSS into `style.css`. Remove the `document.head.appendChild(style)` block from `script.js`.
-
-**Impact:** All styles live in one file. Avoids a flash where JS-dependent styles aren't applied until script execution. Eliminates a class of bugs where the style block is appended multiple times.
-
-### 3.11 Semantic HTML Improvements
-
-**Current:** Experience and education entries use generic `<div>` containers. The nav uses `<ul>` but the content sections don't leverage semantic elements.
-
-**Proposed:**
-
-- Wrap the experience timeline in `<article>` elements instead of plain `<div class="experience-card">`.
-- Add `<time datetime="...">` around date ranges for machine readability.
-- Add `aria-label` to icon-only links and the hamburger button for screen reader accessibility.
-
-```html
-<article class="experience-card glass">
-  ...
-  <p class="experience-years">
-      <time datetime="2023-07/2026-02">July 2023 – Present</time>
-  </p>
-  ...
-</article>
-```
-
-```html
-<button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-```
-
-**Impact:** Better accessibility, SEO, and self-documenting markup.
-
-### 3.12 Consistent Section Naming Convention
-
-**Current:** Section CSS classes follow the pattern `.{section-name}` with child classes `.{section-name}-content`, `.{section-name}-card`, etc. This is consistent but undocumented, so new sections risk drifting.
-
-**Proposed:** Document the naming convention in `copilot-instructions.md` (already done) and enforce it by keeping a checklist for new sections:
-
-1. `<section id="x" class="x">` — section wrapper
-2. `.x-content` — inner content container
-3. `.x-card.glass` — individual card
-4. `.x-info` → `.x-icon` + `.x-details` — card internals
-5. Nav link in `.nav-menu` + footer link in `.footer-links`
-
-No tooling change needed — this is a convention to maintain.
-
-### 3.13 Consolidate Duplicated CSS into Shared Classes
-
-**Current:** Experience and education cards share nearly identical styles (~60 lines each for `.experience-card`, `.experience-info`, `.experience-icon`, `.experience-details` and their `.education-*` counterparts). The responsive overrides at 768px and 480px also duplicate rules for both prefixes side-by-side.
-
-**Proposed:** Extract shared card styles into reusable classes:
-
-```css
-/* Shared card layout */
-.info-card         { padding: 3rem; margin-bottom: 2rem; }
-.info-card__layout { display: flex; align-items: flex-start; gap: 2rem; }
-.info-card__icon   { flex-shrink: 0; width: 80px; height: 80px;
-                     background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
-                     border-radius: 50%; display: flex; align-items: center;
-                     justify-content: center; box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3); }
-.info-card__icon i { font-size: 2rem; color: white; }
-.info-card__title  { font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700; }
-.info-card__subtitle { font-size: 1.3rem; color: var(--color-text); margin-bottom: 0.3rem; font-weight: 600; }
-.info-card__meta   { color: var(--color-text-subtle); font-size: 1rem; margin-bottom: 0.3rem; font-weight: 500; }
-```
-
-Then use section-specific classes only for what actually differs (e.g., `.experience-content { max-width: 1000px }` vs `.education-content { max-width: 800px }`). Responsive overrides collapse to a single `.info-card` block.
-
-**Impact:** Eliminates ~100 lines of duplicated CSS. Adding a new card-based section (e.g., Projects, Publications) requires zero new base styles.
-
-### 3.14 Modularize JavaScript by Concern
-
-**Current:** `script.js` is a single 237-line file. All behavior — smooth scroll, mobile menu, navbar effect, IntersectionObserver, parallax, contact form, image loading, ripple effect — lives inside one `DOMContentLoaded` callback with no separation.
-
-**Proposed:** Split into ES modules loaded via `<script type="module">`:
-
-```
-js/
-  main.js          — imports and initializes modules
-  navigation.js    — smooth scroll, mobile menu toggle, navbar scroll class
-  animations.js    — IntersectionObserver reveal, parallax, ripple effect
-  images.js        — fade-in on load, error handling
-```
-
-Each module exports an `init()` function called from `main.js`:
-
-```js
-// main.js
-import { init as initNav } from './navigation.js';
-import { init as initAnimations } from './animations.js';
-import { init as initImages } from './images.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    initNav();
-    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-        initAnimations();
-    }
-    initImages();
-});
-```
-
-**Impact:** Each file has a single responsibility. New behavior (e.g., a contact form, theme toggle) gets its own module. The `prefers-reduced-motion` gate (§3.8) becomes a natural import boundary rather than an `if` block wrapping half the file. ES modules are supported in all evergreen browsers and are `defer`ed by default.
-
-### 3.15 Remove Dead Code
-
-**Current:** `style.css` contains ~120 lines of `.project-*` styles (`.project-card`, `.project-image`, `.project-overlay`, `.project-links`, `.project-content`, `.project-placeholder`) and `script.js` has `.project-card` hover handlers and a `#contact-form` submit handler. None of these elements exist in `index.html`.
-
-**Proposed:** Remove all `.project-*` CSS rules and the JS `projectCards` hover block and `contactForm` handler. If a Projects section is added later, reintroduce styles using the shared `.info-card` classes (§3.13).
-
-**Impact:** Eliminates ~130 lines of unused code across two files. Reduces CSS file size and removes confusion about whether a projects section exists.
-
-### 3.16 Add Meta Tags and Open Graph
-
-**Current:** `<head>` contains only `<title>`, charset, and viewport meta tags. No description, no Open Graph, no favicon.
-
-**Proposed:**
-
-```html
-<meta name="description" content="Brandon Yue — Software Engineer specializing in full-stack development, security, and mobility.">
-<meta property="og:title" content="Brandon Yue - Software Engineer">
-<meta property="og:description" content="Software Engineer specializing in full-stack development, security, and mobility.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://bryue.github.io">
-<meta property="og:image" content="https://bryue.github.io/assets/images/Robotics_Picture.jpeg">
-<link rel="icon" href="assets/favicon.ico">
-```
-
-**Impact:** Better SEO, richer link previews when shared on LinkedIn/Slack/etc.
-
-## 4. Priority Order
-
-| Priority | Change | Effort | Principle |
-|----------|--------|--------|-----------|
-| 1 | Add `defer` to script tag | Trivial | Performance |
-| 2 | Add preconnect hints | Trivial | Performance |
-| 3 | Extract injected CSS from JS into `style.css` | Small | Maintainability |
-| 4 | CSS custom properties for design tokens | Small | Maintainability |
-| 5 | Consolidate duplicated CSS into shared classes | Small | Reuse |
-| 6 | Throttle scroll listeners with rAF | Small | Performance |
-| 7 | Remove `backdrop-filter` from shapes | Small | Performance |
-| 8 | CSS class toggle for scrolled navbar | Small | Performance, Maintainability |
-| 9 | `content-visibility: auto` on below-fold sections | Small | Performance |
-| 10 | Semantic HTML + ARIA attributes | Small | Maintainability |
-| 11 | Add `width`/`height` to hero image | Small | Performance |
-| 12 | Respect `prefers-reduced-motion` in JS | Small | Performance |
-| 13 | Modularize JS into ES modules | Medium | Reuse, Maintainability |
-| 14 | Self-host Inter font with `font-display: swap` | Medium | Performance, Tooling |
-| 15 | Convert hero image to AVIF with `<picture>` | Medium | Tooling, Performance |
-| 16 | Remove dead project/form code | Small | Maintainability |
-| 17 | Add meta tags and Open Graph | Small | Tooling |
+## 3. Changes Applied
+
+All proposed changes have been implemented. Two items remain as open issues:
+
+- [#1 — Self-host Inter font as WOFF2](https://github.com/bryue/bryue.github.io/issues/1) (§3.1 partial)
+- [#2 — Convert hero image to AVIF with `<picture>` fallback](https://github.com/bryue/bryue.github.io/issues/2) (§3.5 partial)
+
+### Summary
+
+| § | Change | Status |
+|---|--------|--------|
+| 3.1 | Font loading — preconnect + defer Font Awesome, drop weight 300 | ✅ Done (self-hosting → [#1](https://github.com/bryue/bryue.github.io/issues/1)) |
+| 3.2 | Script loading — superseded by ES modules (§3.14) | ✅ Done |
+| 3.3 | `content-visibility: auto` on below-fold sections | ✅ Done |
+| 3.4 | Remove `backdrop-filter` from shapes, CSS class toggle for navbar | ✅ Done |
+| 3.5 | Hero image `width`/`height`/`fetchpriority` | ✅ Done (AVIF → [#2](https://github.com/bryue/bryue.github.io/issues/2)) |
+| 3.6 | Single rAF-throttled scroll listener | ✅ Done |
+| 3.7 | Preconnect hints | ✅ Done |
+| 3.8 | `prefers-reduced-motion` JS gating | ✅ Done |
+| 3.9 | CSS custom properties for design tokens | ✅ Done |
+| 3.10 | Extract injected CSS from JS | ✅ Done |
+| 3.11 | Semantic HTML (`<article>`, `<time>`, ARIA) | ✅ Done |
+| 3.12 | Section naming convention | Convention only |
+| 3.13 | Consolidate duplicated card CSS | ✅ Done |
+| 3.14 | Modularize JS into ES modules | ✅ Done |
+| 3.15 | Remove dead `.project-*` / form code | ✅ Done |
+| 3.16 | Meta tags and Open Graph | ✅ Done |
+
+## 4. Outstanding Work
+
+Tracked as GitHub issues — see [#1](https://github.com/bryue/bryue.github.io/issues/1) and [#2](https://github.com/bryue/bryue.github.io/issues/2).
