@@ -1,5 +1,5 @@
 export function init() {
-    const images = document.querySelectorAll('img[src]');
+    const images = document.querySelectorAll('img[src]:not([fetchpriority="high"])');
     images.forEach(img => {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.3s ease';

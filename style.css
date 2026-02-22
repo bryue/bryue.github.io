@@ -160,7 +160,6 @@ body {
     max-width: 1200px;
     z-index: 1000;
     padding: 15px 30px;
-    transition: background 0.3s ease;
 }
 
 .navbar.scrolled {
