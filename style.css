@@ -1,5 +1,6 @@
 /* Design Tokens */
 :root {
+    color-scheme: dark;
     --color-primary: #1e90ff;
     --color-primary-dark: #0066cc;
     --color-primary-light: #00bfff;
@@ -28,6 +29,8 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) #1a1a1a;
 }
 
 body {
@@ -103,6 +106,24 @@ body {
     25% { transform: translateY(-20px) rotate(90deg); }
     50% { transform: translateY(-40px) rotate(180deg); }
     75% { transform: translateY(-20px) rotate(270deg); }
+}
+
+/* Skip navigation link */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 1rem;
+    background: var(--color-primary);
+    color: white;
+    z-index: 1001;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 var(--radius-button) 0;
+}
+
+.skip-link:focus {
+    top: 0;
 }
 
 /* Glass Morphism Effect */
@@ -380,7 +401,7 @@ section {
 
 .skill-item span {
     font-weight: 500;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     hyphens: auto;
     line-height: 1.2;
 }
@@ -672,14 +693,14 @@ section {
     .experience-details h3,
     .education-details h3 {
         font-size: 1.5rem;
-        word-wrap: break-word;
+        overflow-wrap: break-word;
         hyphens: auto;
     }
     
     .experience-details h4,
     .education-details h4 {
         font-size: 1.1rem;
-        word-wrap: break-word;
+        overflow-wrap: break-word;
         hyphens: auto;
     }
     
@@ -734,7 +755,6 @@ section {
         padding: 1rem 0.8rem;
         margin: 0 0.3rem 1.5rem 0.3rem;
         overflow: hidden;
-        word-wrap: break-word;
         overflow-wrap: break-word;
         hyphens: auto;
         max-width: 100%;
@@ -744,10 +764,6 @@ section {
     .experience-details,
     .education-details {
         overflow: hidden;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        max-width: 100%;
     }
     
     .experience-details h3,
@@ -755,11 +771,7 @@ section {
         font-size: 1.2rem;
         line-height: 1.3;
         margin-bottom: 0.8rem;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        word-break: break-word;
         hyphens: none;
-        max-width: 100%;
         white-space: normal;
     }
     
@@ -768,10 +780,6 @@ section {
         font-size: 0.95rem;
         line-height: 1.4;
         margin-bottom: 0.5rem;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        max-width: 100%;
     }
     
     .experience-location,
@@ -779,57 +787,33 @@ section {
     .education-years {
         font-size: 0.85rem;
         line-height: 1.4;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        max-width: 100%;
     }
     
     .experience-description,
     .education-description {
         font-size: 0.85rem;
         line-height: 1.5;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        max-width: 100%;
-    }
-    
-    .experience-description p,
-    .education-description p {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        max-width: 100%;
     }
     
     .experience-description ul,
     .education-description ul {
         margin-left: 0.8rem;
         padding-right: 0.3rem;
-        max-width: 100%;
-        overflow: hidden;
     }
     
     .experience-description li,
     .education-description li {
         font-size: 0.8rem;
         margin-bottom: 0.4rem;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        max-width: 100%;
     }
     
     .experience-tech {
-        max-width: 100%;
         overflow: hidden;
     }
     
     .tech-tag {
         font-size: 0.65rem;
         padding: 0.15rem 0.5rem;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
         max-width: 100%;
         display: inline-block;
     }
@@ -844,28 +828,6 @@ section {
     
     .section-title {
         font-size: 1.8rem;
-    }
-}
-
-/* Smooth scrolling and animations */
-@media (prefers-reduced-motion: no-preference) {
-    .about-text,
-    .contact-info,
-    .education-card,
-    .experience-card {
-        animation: fadeInUp 0.6s ease-out forwards;
-        animation-fill-mode: forwards;
-    }
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 

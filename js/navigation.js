@@ -1,8 +1,10 @@
+let navbar;
+
 export function init() {
+    navbar = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('a[href^="#"]');
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-    const navbar = document.querySelector('.navbar');
 
     // Smooth scrolling for anchor links
     navLinks.forEach(link => {
@@ -19,10 +21,18 @@ export function init() {
 
     // Mobile menu toggle
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
+        const toggleMenu = () => {
             const isActive = hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', String(isActive));
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        hamburger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMenu();
+            }
         });
 
         navLinks.forEach(link => {
@@ -34,11 +44,9 @@ export function init() {
         });
     }
 
-    // Navbar scroll class toggle (rAF-throttled in main.js)
     updateNavbar();
 }
 
 export function updateNavbar() {
-    const navbar = document.querySelector('.navbar');
-    navbar.classList.toggle('scrolled', window.scrollY > 100);
+    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 100);
 }

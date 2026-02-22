@@ -1,4 +1,7 @@
+let shapes;
+
 export function init() {
+    shapes = document.querySelectorAll('.shape');
     initScrollReveal();
     initRipple();
 }
@@ -9,6 +12,7 @@ function initScrollReveal() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
@@ -41,8 +45,8 @@ function initRipple() {
 }
 
 export function updateParallax() {
-    const shapes = document.querySelectorAll('.shape');
-    const scrolled = window.pageYOffset;
+    if (!shapes) return;
+    const scrolled = window.scrollY;
     shapes.forEach((shape, index) => {
         const rate = scrolled * (0.1 + index * 0.05);
         shape.style.transform = `translateY(${rate}px) rotate(${rate * 0.1}deg)`;

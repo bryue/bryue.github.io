@@ -4,36 +4,30 @@ import { init as initImages } from './images.js';
 
 const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
+// Async-load Font Awesome (CSP-safe alternative to inline onload)
+const faLink = document.getElementById('fa-stylesheet');
+if (faLink) {
+    if (faLink.sheet) {
+        faLink.media = 'all';
+    } else {
+        faLink.addEventListener('load', () => { faLink.media = 'all'; });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initNav();
     initImages();
+    if (motionOk) initAnimations();
 
-    if (motionOk) {
-        initAnimations();
-
-        // Single rAF-throttled scroll listener for navbar + parallax
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    updateNavbar();
-                    updateParallax();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    } else {
-        // Still toggle navbar class, just without parallax
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    updateNavbar();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    }
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateNavbar();
+                if (motionOk) updateParallax();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
 });

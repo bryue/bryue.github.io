@@ -27,6 +27,10 @@ No build system. Four static files served directly by GitHub Pages:
 | Inter font (400–700) | Variable | `fonts.googleapis.com` / `fonts.gstatic.com` | N/A (Google Fonts does not support SRI) |
 | Font Awesome | 6.0.0 | `cdnjs.cloudflare.com` | `sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS` |
 
+### Domain & Hosting
+
+The site is hosted on GitHub Pages (`bryue.github.io`) with a custom domain `www.brandonyue.com` configured via the `CNAME` file. DNS is managed through Cloudflare, which routes `brandonyue.com` / `www.brandonyue.com` to `bryue.github.io`. All canonical URLs, Open Graph tags, sitemap entries, and JSON-LD structured data use the `www.brandonyue.com` origin so search engines index the custom domain as the authoritative source.
+
 ### Browser Support Targets
 
 Evergreen browsers only — latest two versions of Chrome, Firefox, Safari, and Edge. No IE11 support. This permits use of `backdrop-filter`, `content-visibility`, CSS custom properties, ES modules, and `IntersectionObserver` without polyfills.
