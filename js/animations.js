@@ -18,7 +18,7 @@ function initScrollReveal() {
     }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
     const animated = document.querySelectorAll(
-        '.about-text, .contact-info, .education-card, .experience-card, .skill-item'
+        '.contact-info, .experience-card'
     );
     animated.forEach(el => {
         el.style.opacity = '0';

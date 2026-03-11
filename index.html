@@ -6,16 +6,16 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any" />
     <link rel="icon" href="favicon.png" type="image/png" />
     <title>Brandon Yue - Software Engineer</title>
-    <meta name="description" content="Brandon Yue — Software Engineer specializing in full-stack development, security, and mobility. MIT graduate with experience at Microsoft.">
+    <meta name="description" content="Brandon Yue — Software Engineer specializing in performance engineering, security, and mobility. MIT graduate with experience at Microsoft.">
     <link rel="canonical" href="https://www.brandonyue.com/" />
     <meta property="og:title" content="Brandon Yue - Software Engineer">
-    <meta property="og:description" content="Software Engineer specializing in full-stack development, security, and mobility. MIT graduate with experience at Microsoft.">
+    <meta property="og:description" content="Software Engineer specializing in performance engineering, security, and mobility. MIT graduate with experience at Microsoft.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.brandonyue.com/">
     <meta property="og:image" content="https://www.brandonyue.com/assets/images/Robotics_Picture.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Brandon Yue - Software Engineer">
-    <meta name="twitter:description" content="Software Engineer specializing in full-stack development, security, and mobility. MIT graduate with experience at Microsoft.">
+    <meta name="twitter:description" content="Software Engineer specializing in performance engineering, security, and mobility. MIT graduate with experience at Microsoft.">
     <meta name="twitter:image" content="https://www.brandonyue.com/assets/images/Robotics_Picture.jpeg">
     <script type="application/ld+json">
     {
@@ -32,7 +32,7 @@
         "@type": "CollegeOrUniversity",
         "name": "Massachusetts Institute of Technology"
       },
-      "knowsAbout": ["Full-Stack Development", "Security", "Android", "Kotlin", "Python", "C++"],
+      "knowsAbout": ["Performance Engineering", "Security", "Android", "Kotlin", "Python", "C++"],
       "sameAs": [
         "https://www.linkedin.com/in/brandon-y-51365a14a/",
         "https://github.com/bryue"
@@ -401,83 +401,27 @@ section {
     margin: 0 auto;
 }
 
-/* About Section */
-.about-text {
-    padding: 3rem;
-    margin: 0 auto;
-    max-width: 800px;
-}
 
-.about-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-primary);
-}
 
-.about-text p {
-    margin-bottom: 1.5rem;
-    color: var(--color-text-muted);
-    line-height: 1.7;
-}
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
 
-.skill-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    padding: 1.2rem 0.8rem;
-    background: var(--color-accent-bg);
-    border-radius: var(--radius-button);
-    transition: all 0.3s ease;
-    text-align: center;
-    min-height: 60px;
-}
 
-.skill-item:hover {
-    background: var(--color-accent-bg-hover);
-    transform: translateY(-2px);
-}
 
-.skill-item .icon {
-    font-size: 1.5rem;
-    color: var(--color-primary);
-    width: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-}
 
-.skill-item span {
-    font-weight: 500;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    line-height: 1.2;
-}
 
-/* Shared Card Styles (Experience + Education) */
-.experience-card,
-.education-card {
+/* Experience Card Styles */
+.experience-card {
     padding: 3rem;
     margin-bottom: 2rem;
 }
 
-.experience-info,
-.education-info {
+.experience-info {
     display: flex;
     align-items: flex-start;
     gap: 2rem;
 }
 
-.experience-icon,
-.education-icon {
+.experience-icon {
     flex-shrink: 0;
     width: 80px;
     height: 80px;
@@ -489,22 +433,19 @@ section {
     box-shadow: 0 4px 15px var(--color-accent-shadow);
 }
 
-.experience-icon .icon,
-.education-icon .icon {
+.experience-icon .icon {
     font-size: 2rem;
     color: white;
 }
 
-.experience-details h3,
-.education-details h3 {
+.experience-details h3 {
     font-size: 1.8rem;
     color: var(--color-primary);
     margin-bottom: 0.5rem;
     font-weight: 700;
 }
 
-.experience-details h4,
-.education-details h4 {
+.experience-details h4 {
     font-size: 1.3rem;
     color: var(--color-text);
     margin-bottom: 0.3rem;
@@ -512,15 +453,13 @@ section {
 }
 
 .experience-location,
-.experience-years,
-.education-years {
+.experience-years {
     color: var(--color-text-subtle);
     font-size: 1rem;
     font-weight: 500;
 }
 
-.experience-description,
-.education-description {
+.experience-description {
     color: var(--color-text-muted);
     line-height: 1.7;
     font-size: 1rem;
@@ -532,10 +471,6 @@ section {
     margin: 0 auto;
 }
 
-.education-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
 
 .experience-location {
     margin-bottom: 0.3rem;
@@ -545,9 +480,6 @@ section {
     margin-bottom: 1.5rem;
 }
 
-.education-years {
-    margin-bottom: 1rem;
-}
 
 .experience-description {
     margin-bottom: 1.5rem;
@@ -716,45 +648,38 @@ section {
         padding: 10px 20px;
     }
     
-    .about-text,
     .contact-info {
         padding: 2rem;
     }
     
-    .experience-info,
-    .education-info {
+    .experience-info {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
     }
     
-    .experience-icon,
-    .education-icon {
+    .experience-icon {
         align-self: center;
         width: 60px;
         height: 60px;
         margin-bottom: 0.5rem;
     }
     
-    .experience-icon .icon,
-    .education-icon .icon {
+    .experience-icon .icon {
         font-size: 1.5rem;
     }
     
-    .experience-card,
-    .education-card {
+    .experience-card {
         padding: 2rem 1.5rem;
     }
     
-    .experience-details h3,
-    .education-details h3 {
+    .experience-details h3 {
         font-size: 1.5rem;
         overflow-wrap: break-word;
         hyphens: auto;
     }
     
-    .experience-details h4,
-    .education-details h4 {
+    .experience-details h4 {
         font-size: 1.1rem;
         overflow-wrap: break-word;
         hyphens: auto;
@@ -786,9 +711,6 @@ section {
         align-items: center;
     }
     
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
     
     .footer-content {
         flex-direction: column;
@@ -806,8 +728,7 @@ section {
         padding: 1rem 0;
     }
     
-    .experience-card,
-    .education-card {
+    .experience-card {
         padding: 1rem 0.8rem;
         margin: 0 0.3rem 1.5rem 0.3rem;
         overflow: hidden;
@@ -817,13 +738,11 @@ section {
         box-sizing: border-box;
     }
     
-    .experience-details,
-    .education-details {
+    .experience-details {
         overflow: hidden;
     }
     
-    .experience-details h3,
-    .education-details h3 {
+    .experience-details h3 {
         font-size: 1.2rem;
         line-height: 1.3;
         margin-bottom: 0.8rem;
@@ -831,34 +750,29 @@ section {
         white-space: normal;
     }
     
-    .experience-details h4,
-    .education-details h4 {
+    .experience-details h4 {
         font-size: 0.95rem;
         line-height: 1.4;
         margin-bottom: 0.5rem;
     }
     
     .experience-location,
-    .experience-years,
-    .education-years {
+    .experience-years {
         font-size: 0.85rem;
         line-height: 1.4;
     }
     
-    .experience-description,
-    .education-description {
+    .experience-description {
         font-size: 0.85rem;
         line-height: 1.5;
     }
     
-    .experience-description ul,
-    .education-description ul {
+    .experience-description ul {
         margin-left: 0.8rem;
         padding-right: 0.3rem;
     }
     
-    .experience-description li,
-    .education-description li {
+    .experience-description li {
         font-size: 0.8rem;
         margin-bottom: 0.4rem;
     }
@@ -907,7 +821,6 @@ section {
 
 /* Below-fold rendering optimization */
 .experience,
-.education,
 .contact {
     content-visibility: auto;
     contain-intrinsic-size: auto 600px;
@@ -986,9 +899,9 @@ section {
         </div>
         <ul class="nav-menu">
           <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
+
           <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#education" class="nav-link">Education</a></li>
+
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
         <div class="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
@@ -1010,7 +923,7 @@ section {
                     </h1>
             <p class="hero-description">
               Passionate about creating innovative solutions to make a positive
-              impact on the world. Specializing in full-stack development,
+              impact on the world. Specializing in performance engineering,
               security, and mobility.
             </p>
             <div class="hero-buttons">
@@ -1049,72 +962,6 @@ section {
       </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">About Me</h2>
-          <p class="section-subtitle">
-            Getting to know the person behind the code
-          </p>
-        </div>
-        <div class="about-content">
-          <div class="about-text glass">
-            <h3>Hello World, I'm Brandon!</h3>
-            <p>
-              I'm a passionate software engineer with a strong foundation in
-              computer science and a love for security. My interest in technology
-              was jumpstarted by The Matrix, and I've kept that fire burning,
-              evolving it into a career based on research-based education, dedicated to formulating
-              innovative, secure, and scalable solutions to real-world problems.
-            </p>
-            <p>
-              When I'm not coding, you can find me swimming, playing video
-              games, or exploring the latest advancements in the field. I am a
-              lifelong learner, and I am always eager to take on new challenges.
-            </p>
-            <div class="skills-grid">
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 448 512"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/></svg>
-                <span>Python</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 640 512"><path d="M414.8 40.79L286.8 488.8C281.9 505.8 264.2 515.6 247.2 510.8C230.2 505.9 220.4 488.2 225.2 471.2L353.2 23.21C358.1 6.216 375.8-3.624 392.8 1.232C409.8 6.087 419.6 23.8 414.8 40.79H414.8zM518.6 121.4L630.6 233.4C643.1 245.9 643.1 266.1 630.6 278.6L518.6 390.6C506.1 403.1 485.9 403.1 473.4 390.6C460.9 378.1 460.9 357.9 473.4 345.4L562.7 256L473.4 166.6C460.9 154.1 460.9 133.9 473.4 121.4C485.9 108.9 506.1 108.9 518.6 121.4V121.4zM166.6 166.6L77.25 256L166.6 345.4C179.1 357.9 179.1 378.1 166.6 390.6C154.1 403.1 133.9 403.1 121.4 390.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4L121.4 121.4C133.9 108.9 154.1 108.9 166.6 121.4C179.1 133.9 179.1 154.1 166.6 166.6V166.6z"/></svg>
-                <span>Kotlin</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 640 512"><path d="M414.8 40.79L286.8 488.8C281.9 505.8 264.2 515.6 247.2 510.8C230.2 505.9 220.4 488.2 225.2 471.2L353.2 23.21C358.1 6.216 375.8-3.624 392.8 1.232C409.8 6.087 419.6 23.8 414.8 40.79H414.8zM518.6 121.4L630.6 233.4C643.1 245.9 643.1 266.1 630.6 278.6L518.6 390.6C506.1 403.1 485.9 403.1 473.4 390.6C460.9 378.1 460.9 357.9 473.4 345.4L562.7 256L473.4 166.6C460.9 154.1 460.9 133.9 473.4 121.4C485.9 108.9 506.1 108.9 518.6 121.4V121.4zM166.6 166.6L77.25 256L166.6 345.4C179.1 357.9 179.1 378.1 166.6 390.6C154.1 403.1 133.9 403.1 121.4 390.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4L121.4 121.4C133.9 108.9 154.1 108.9 166.6 121.4C179.1 133.9 179.1 154.1 166.6 166.6V166.6z"/></svg>
-                <span>C++</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 448 512"><path d="M448 80V128C448 172.2 347.7 208 224 208C100.3 208 0 172.2 0 128V80C0 35.82 100.3 0 224 0C347.7 0 448 35.82 448 80zM393.2 214.7C413.1 207.3 433.1 197.8 448 186.1V288C448 332.2 347.7 368 224 368C100.3 368 0 332.2 0 288V186.1C14.93 197.8 34.02 207.3 54.85 214.7C99.66 230.7 159.5 240 224 240C288.5 240 348.3 230.7 393.2 214.7V214.7zM54.85 374.7C99.66 390.7 159.5 400 224 400C288.5 400 348.3 390.7 393.2 374.7C413.1 367.3 433.1 357.8 448 346.1V432C448 476.2 347.7 512 224 512C100.3 512 0 476.2 0 432V346.1C14.93 357.8 34.02 367.3 54.85 374.7z"/></svg>
-                <span>Databases</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 576 512"><path d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55"/></svg>
-                <span>Android</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 512 512"><path d="M480 288H32c-17.62 0-32 14.38-32 32v128c0 17.62 14.38 32 32 32h448c17.62 0 32-14.38 32-32v-128C512 302.4 497.6 288 480 288zM352 408c-13.25 0-24-10.75-24-24s10.75-24 24-24s24 10.75 24 24S365.3 408 352 408zM416 408c-13.25 0-24-10.75-24-24s10.75-24 24-24s24 10.75 24 24S429.3 408 416 408zM480 32H32C14.38 32 0 46.38 0 64v128c0 17.62 14.38 32 32 32h448c17.62 0 32-14.38 32-32V64C512 46.38 497.6 32 480 32zM352 152c-13.25 0-24-10.75-24-24S338.8 104 352 104S376 114.8 376 128S365.3 152 352 152zM416 152c-13.25 0-24-10.75-24-24S402.8 104 416 104S440 114.8 440 128S429.3 152 416 152z"/></svg>
-                <span>Operating Systems</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 512 512"><path d="M466.5 83.71l-192-80C269.6 1.67 261.3 0 256 0C250.7 0 242.5 1.67 237.6 3.702l-192 80C27.7 91.1 16 108.6 16 127.1c0 257.2 189.2 384 239.1 384c51.1 0 240-128.2 240-384C496 108.6 484.3 91.1 466.5 83.71zM256 446.5l.0234-381.1c.0059-.0234 0 0 0 0l175.9 73.17C427.8 319.7 319 417.1 256 446.5z"/></svg>
-                <span>Security</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 640 512"><path d="M400 0C426.5 0 448 21.49 448 48V144C448 170.5 426.5 192 400 192H352V224H608C625.7 224 640 238.3 640 256C640 273.7 625.7 288 608 288H512V320H560C586.5 320 608 341.5 608 368V464C608 490.5 586.5 512 560 512H400C373.5 512 352 490.5 352 464V368C352 341.5 373.5 320 400 320H448V288H192V320H240C266.5 320 288 341.5 288 368V464C288 490.5 266.5 512 240 512H80C53.49 512 32 490.5 32 464V368C32 341.5 53.49 320 80 320H128V288H32C14.33 288 0 273.7 0 256C0 238.3 14.33 224 32 224H288V192H240C213.5 192 192 170.5 192 144V48C192 21.49 213.5 0 240 0H400zM256 64V128H384V64H256zM224 448V384H96V448H224zM416 384V448H544V384H416z"/></svg>
-                <span>Infrastructure</span>
-              </div>
-              <div class="skill-item">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 512 512"><path d="M184 0C214.9 0 240 25.07 240 56V456C240 486.9 214.9 512 184 512C155.1 512 131.3 490.1 128.3 461.9C123.1 463.3 117.6 464 112 464C76.65 464 48 435.3 48 400C48 392.6 49.27 385.4 51.59 378.8C21.43 367.4 0 338.2 0 304C0 272.1 18.71 244.5 45.77 231.7C37.15 220.8 32 206.1 32 192C32 161.3 53.59 135.7 82.41 129.4C80.84 123.9 80 118 80 112C80 82.06 100.6 56.92 128.3 49.93C131.3 21.86 155.1 0 184 0zM383.7 49.93C411.4 56.92 432 82.06 432 112C432 118 431.2 123.9 429.6 129.4C458.4 135.7 480 161.3 480 192C480 206.1 474.9 220.8 466.2 231.7C493.3 244.5 512 272.1 512 304C512 338.2 490.6 367.4 460.4 378.8C462.7 385.4 464 392.6 464 400C464 435.3 435.3 464 400 464C394.4 464 388.9 463.3 383.7 461.9C380.7 490.1 356.9 512 328 512C297.1 512 272 486.9 272 456V56C272 25.07 297.1 0 328 0C356.9 0 380.7 21.86 383.7 49.93z"/></svg>
-                <span>Neural Networks</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Experience Section -->
     <section id="experience" class="experience">
@@ -1241,62 +1088,6 @@ section {
       </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="education">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Education</h2>
-          <p class="section-subtitle">
-            Academic foundation and continuous learning
-          </p>
-        </div>
-        <div class="education-content">
-          <article class="education-card glass">
-            <div class="education-info">
-              <div class="education-icon">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 512 512"><path d="M45.63 79.75L52 81.25v58.5C45 143.9 40 151.3 40 160c0 8.375 4.625 15.38 11.12 19.75L35.5 242C33.75 248.9 37.63 256 43.13 256h41.75c5.5 0 9.375-7.125 7.625-13.1L76.88 179.8C83.38 175.4 88 168.4 88 160c0-8.75-5-16.12-12-20.25V87.13L128 99.63l.001 60.37c0 70.75 57.25 128 128 128s127.1-57.25 127.1-128L384 99.62l82.25-19.87c18.25-4.375 18.25-27 0-31.5l-190.4-46c-13-3-26.62-3-39.63 0l-190.6 46C27.5 52.63 27.5 75.38 45.63 79.75zM359.2 312.8l-103.2 103.2l-103.2-103.2c-69.93 22.3-120.8 87.2-120.8 164.5C32 496.5 47.53 512 66.67 512h378.7C464.5 512 480 496.5 480 477.3C480 400 429.1 335.1 359.2 312.8z"/></svg>
-              </div>
-              <div class="education-details">
-                <h3>Massachusetts Institute of Technology</h3>
-                <h4>
-                  Master of Engineering in Electrical Engineering and Computer
-                  Science
-                </h4>
-                <p class="education-years"><time datetime="2022-09">September 2022</time> – <time datetime="2023-06">June 2023</time></p>
-                <p class="education-description">
-                  Advanced graduate study with concentration in Computer
-                  Systems. Achieved perfect 5.0/5.0 GPA while conducting
-                  research on out-of-memory problems in ML algorithms using
-                  extremely large datasets.
-                </p>
-              </div>
-            </div>
-          </article>
-          <article class="education-card glass">
-            <div class="education-info">
-              <div class="education-icon">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 640 512"><path d="M623.1 136.9l-282.7-101.2c-13.73-4.91-28.7-4.91-42.43 0L16.05 136.9C6.438 140.4 0 149.6 0 160s6.438 19.65 16.05 23.09L76.07 204.6c-11.89 15.8-20.26 34.16-24.55 53.95C40.05 263.4 32 274.8 32 288c0 9.953 4.814 18.49 11.94 24.36l-24.83 149C17.48 471.1 25 480 34.89 480H93.11c9.887 0 17.41-8.879 15.78-18.63l-24.83-149C91.19 306.5 96 297.1 96 288c0-10.29-5.174-19.03-12.72-24.89c4.252-17.76 12.88-33.82 24.94-47.03l190.6 68.23c13.73 4.91 28.7 4.91 42.43 0l282.7-101.2C633.6 179.6 640 170.4 640 160S633.6 140.4 623.1 136.9zM351.1 314.4C341.7 318.1 330.9 320 320 320c-10.92 0-21.69-1.867-32-5.555L142.8 262.5L128 405.3C128 446.6 213.1 480 320 480c105.1 0 192-33.4 192-74.67l-14.78-142.9L351.1 314.4z"/></svg>
-              </div>
-              <div class="education-details">
-                <h3>Massachusetts Institute of Technology</h3>
-                <h4>
-                  Bachelor of Science in Electrical Engineering and Computer
-                  Science
-                </h4>
-                <p class="education-years"><time datetime="2018-09">September 2018</time> – <time datetime="2022-05">May 2022</time></p>
-                <p class="education-description">
-                  Comprehensive undergraduate study in EECS with concentration
-                  in Philosophy. Achieved 4.5/5.0 GPA while building strong
-                  foundations in algorithms, data structures, software
-                  engineering, and computer systems.
-                </p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- Contact Section -->
     <section id="contact" class="contact">
       <div class="container">
@@ -1351,9 +1142,9 @@ section {
           <p>&copy; 2026 Brandon Yue. All rights reserved.</p>
           <div class="footer-links">
             <a href="assets/Brandon_Yue_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
-            <a href="#about">About</a>
+
             <a href="#experience">Experience</a>
-            <a href="#education">Education</a>
+
             <a href="#contact">Contact</a>
           </div>
         </div>
